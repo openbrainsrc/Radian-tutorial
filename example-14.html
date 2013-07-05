@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Radian Tutorial Examples</title>
+  <title>Radian Tutorial Examples: Section 1.3, Example 14</title>
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/css/radian.css"/>
 </head>
@@ -10,7 +10,13 @@
   <br>
   <br>
   <div class="container">
-    <p>Content goes here</p>
+    <h4>Example 14</h4>
+    <plot height=300 aspect=2 x="[[seq(0,4*PI,501)]]">
+      <lines y="[[sin(x)]]" stroke="red"></lines>
+      <lines y="[[cos(x)]]" stroke="blue"></lines>
+      <lines y="[[2*sin(3*x)+cos(5*x+PI/4)]]" stroke-width=2
+             stroke="green"></lines>
+    </plot>
   </div>
 
   <script src="/js/jquery.js"></script>
