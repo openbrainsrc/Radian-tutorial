@@ -9,11 +9,7 @@
 <body ng-controller="MyCtrl">
 
   <div class="container">
-    <h2>Content goes here!</h2>
-
-    <plot height=300 aspect=2>
-      <lines x="[[seq(0,2*PI,101)]]" y="[[sin(x)]]"></lines>
-    </plot>
+    <p>Content goes here</p>
   </div>
 
   <script src="/js/jquery.js"></script>
@@ -24,6 +20,11 @@
   <script src="/js/d3.v2.js"></script>
   <script src="/js/angular.min.js"></script>
   <script src="/js/radian.min.js"></script>
-  <script src="/js/app.js"></script>
+  <script>
+angular.module('myApp', ['radian']).
+  controller('MyCtrl', [function()
+{
+}]);
+  </script>
 </body>
 </html>
