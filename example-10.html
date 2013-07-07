@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Radian Tutorial Examples: Section 1.2, Example 10</title>
+  <title>Radian Tutorial Examples: Section 2.3, Example 10</title>
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/css/radian.css"/>
 </head>
@@ -11,11 +11,33 @@
   <br>
   <div class="container">
     <h4>Example 10</h4>
-    <plot height=300 aspect=2 x="[[seq(0,2*PI,101)]]">
-      <lines y="[[sin(x)]]" stroke="red" stroke-width=5></lines>
-      <lines y="[[cos(x)]]" stroke="blue" stroke-width=10
-             stroke-opacity=0.5></lines>
+    <plot height=300 aspect=1 range-y=0 stroke="none"
+          hist="[[histogram(dat.x,10)]]">
+      <bars x="[[hist.centres]]" y="[[hist.counts]]" fill="red"></bars>
     </plot>
+
+    <plot-data name="dat" format="csv" cols="x">
+      -0.21991614
+      -1.21243350
+      0.25558776
+      -0.13629943
+      -2.22833941
+      -1.60829920
+      -0.55755778
+      -0.23925929
+      0.40663494
+      0.99105558
+      -0.95120549
+      -1.67478975
+      -0.14602045
+      -0.01902537
+      -0.40205444
+      1.44275512
+      -1.05451039
+      -1.01921213
+      1.03799046
+      -0.33640740
+    </plot-data>
   </div>
 
   <script src="/js/jquery.js"></script>

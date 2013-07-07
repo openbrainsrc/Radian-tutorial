@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Radian Tutorial Examples: Section 1.1, Example 2</title>
+  <title>Radian Tutorial Examples: Section 2.1, Example 2</title>
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/css/radian.css"/>
 </head>
@@ -11,9 +11,14 @@
   <br>
   <div class="container">
     <h4>Example 2</h4>
-    <plot height=300 aspect=2>
-      <lines x="[[seq(0,2*PI,101)]]" y="[[sin(x)]]"></lines>
+    <plot height=300 aspect=2 x="[[dat.day]]">
+      <lines y="[[dat.temp]]" stroke="red"></lines>
+      <lines y2="[[dat.prec]]" stroke="blue"></lines>
     </plot>
+
+    <plot-data name="dat" format="csv" cols="day,temp,prec"
+               src="/data/vic2012.csv">
+    </plot-data>
   </div>
 
   <script src="/js/jquery.js"></script>

@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Radian Tutorial Examples: Section 1.2, Example 7</title>
+  <title>Radian Tutorial Examples: Section 2.2, Example 7</title>
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/css/radian.css"/>
 </head>
@@ -11,10 +11,31 @@
   <br>
   <div class="container">
     <h4>Example 7</h4>
-    <plot height=300 aspect=2>
-      <lines x="[[seq(0,2*PI,101)]]" y="[[sin(x)]]"></lines>
-      <lines x="[[seq(0,2*PI,101)]]" y="[[cos(x)]]"></lines>
+    <plot height=300 aspect=1>
+      <points x="[[iris.sepal_length]]" y="[[iris.petal_length]]"
+              marker="[[spmark(iris.species)]]"
+              marker-size=25 fill="[[spcol(iris.species)]]"></points>
     </plot>
+
+    <palette name="spmark" type="discrete">
+      "I. setosa"     circle
+      "I. versicolor" square
+      "I. virginica"  diamond
+    </palette>
+
+    <palette name="spcol" type="discrete">
+      "I. setosa"     red
+      "I. versicolor" green
+      "I. virginica"  blue
+    </palette>
+
+    <plot-data name="iris" format="csv" src="/data/iris.csv"
+               cols="sepal_length,sepal_width,petal_length,petal_width,species">
+      <metadata name="sepal_length" label="Sepal length" units="mm"></metadata>
+      <metadata name="sepal_width" label="Sepal width" units="mm"></metadata>
+      <metadata name="petal_length" label="Petal length" units="mm"></metadata>
+      <metadata name="petal_width" label="Petal width" units="mm"></metadata>
+    </plot-data>
   </div>
 
   <script src="/js/jquery.js"></script>
