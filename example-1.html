@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Radian Tutorial Examples: Section 2.1, Example 1</title>
+  <title>Radian Tutorial Examples: Section 3.1, Example 1</title>
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/css/radian.css"/>
 </head>
@@ -11,19 +11,17 @@
   <br>
   <div class="container">
     <h4>Example 1</h4>
-    <plot height=300 aspect=2>
-      <lines x="[[dat.a]]" y="[[dat.b]]"></lines>
-    </plot>
+    <div class="form-inline">
+      <label>Mean</label>
+      <input type="range" min=0 max=10 step=0.01 ng-model="mu" ng-init="mu=5">
+      <label>&nbsp;&nbsp;Standard deviation</label>
+      <input type="range" min=0.01 max=10 step=0.01 ng-model="sigma" ng-init="sigma=1">
+    </div>
+    <br>
 
-    <plot-data name="dat" format="csv" cols="a,b">
-      1,5
-      2,10
-      3,14
-      4,12
-      5,22
-      6,6
-      7,5
-    </plot-data>
+    <plot height=300 aspect=3 stroke-width=2 stroke="red">
+      <lines x="[[seq(0,10,200)]]" y="[[normal(x,mu,sigma)]]"></lines>
+    </plot>
   </div>
 
   <script src="/js/jquery.js"></script>
@@ -34,6 +32,7 @@
   <script src="/js/d3.v2.js"></script>
   <script src="/js/angular.min.js"></script>
   <script src="/js/radian.min.js"></script>
+  <script src="/js/html5slider.js"></script>
   <script>
 angular.module('myApp', ['radian']).
   controller('MyCtrl', [function()

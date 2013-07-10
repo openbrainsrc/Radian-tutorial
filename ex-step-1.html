@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Radian Tutorial Examples: Section 2.4, Example 11</title>
+  <title>Radian Tutorial Examples: Section 3.2, Step 1</title>
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/css/radian.css"/>
 </head>
@@ -10,23 +10,15 @@
   <br>
   <br>
   <div class="container">
-    <h4>Example 11</h4>
-    <plot-row width=600 height=400 x="[[seq(0,2*PI,101)]]">
-      <plot-col layout-share=1>
-        <plot>
-          <lines y="[[sin(x)]]"></lines>
-        </plot>
-        <plot>
-          <lines y="[[sin(2*x)]]"></lines>
-        </plot>
-        <plot>
-          <lines y="[[sin(3*x)]]"></lines>
-        </plot>
-      </plot-col>
-      <plot layout-share=3>
-        <lines y="[[sin(x)+sin(2*x)+sin(3*x)]]"></lines>
-      </plot>
-    </plot-row>
+    <h4>Final example: Step 1</h4>
+    <plot height=400 aspect=2 zoom-x
+          axis-y-label="Opening price" axis-x-label="off">
+      <lines x="[[dat.Date]]" y="[[dat.Open]]" stroke="blue"></lines>
+    </plot>
+
+    <plot-data name="dat" format="csv" src="/data/CSCO.csv">
+      <metadata name="Date" format="date"></metadata>
+    </plot-data>
   </div>
 
   <script src="/js/jquery.js"></script>
@@ -37,11 +29,11 @@
   <script src="/js/d3.v2.js"></script>
   <script src="/js/angular.min.js"></script>
   <script src="/js/radian.min.js"></script>
-  <script>
+<script>
 angular.module('myApp', ['radian']).
   controller('MyCtrl', [function()
 {
 }]);
-  </script>
+</script>
 </body>
 </html>

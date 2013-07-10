@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Radian Tutorial Examples: Section 2.1, Example 2</title>
+  <title>Radian Tutorial Examples: Section 3.1, Example 2</title>
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/css/radian.css"/>
 </head>
@@ -11,14 +11,17 @@
   <br>
   <div class="container">
     <h4>Example 2</h4>
-    <plot height=300 aspect=2 x="[[dat.day]]">
-      <lines y="[[dat.temp]]" stroke="red"></lines>
-      <lines y2="[[dat.prec]]" stroke="blue"></lines>
-    </plot>
+    <form class="form-inline">
+      <label>Number of bins:</label>
+      <input type="number" min=4 max=70 ng-model="nbins" ng-init="nbins=25">
+    </form>
 
-    <plot-data name="dat" format="csv" cols="day,temp,prec"
-               src="/data/vic2012.csv">
-    </plot-data>
+    <plot-data name="vic2012" src="/data/vic2012.json"></plot-data>
+
+    <plot height=300 aspect=2 hist="[[histogram(vic2012#tmp,nbins)]]"
+          axis-x-label="Temperature (&deg;C)" axis-y-label="Day count">
+      <bars x="[[hist.centres]]" y="[[hist.counts]]"></bars>
+    </plot>
   </div>
 
   <script src="/js/jquery.js"></script>
@@ -29,6 +32,7 @@
   <script src="/js/d3.v2.js"></script>
   <script src="/js/angular.min.js"></script>
   <script src="/js/radian.min.js"></script>
+  <script src="/js/html5slider.js"></script>
   <script>
 angular.module('myApp', ['radian']).
   controller('MyCtrl', [function()

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Radian Tutorial Examples: Section 3.2, Step 3</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/css/radian.css"/>
+</head>
+<body ng-controller="MyCtrl">
+  <br>
+  <br>
+  <div class="container">
+    <h4>Final example: Step 3</h4>
+    <form class="form-inline">
+      <label>Stock symbol:</label>
+      <select ng-model="sym" ng-init="sym=stocks[0]"
+              ng-options="s for s in stocks" required></select>
+      <button class="btn" ng-click="symbols.push(sym)">
+        Add
+      </button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <label>Plot:</label>
+      <select ng-model="plotvar" ng-init="plotvar=fields[0]"
+              ng-options="s as s.label for s in fields" required></select>
+    </form>
+
+    <plot height=400 aspect=2 zoom-x
+          axis-y-label="[[plotvar.label]]" axis-x-label="off">
+      <lines ng-repeat="s in symbols" d="[[dat[s]]]"
+             x="[[d.Date]]" y="[[d[plotvar.name]]]" stroke="blue"></lines>
+    </plot>
+
+    <plot-data ng-repeat="s in symbols"
+               name="dat" subname="[[s]]"
+               format="csv" src="[[dataUrl(s)]]">
+      <metadata name="Date" format="date"></metadata>
+    </plot-data>
+
+    <div>
+      <span ng-repeat="s in symbols">
+        <button class="btn btn-mini" ng-click="symbols.splice($index,1)">
+          <i class="icon-trash"></i>
+        </button>
+        {{s}}&nbsp;&nbsp;&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <script src="/js/jquery.js"></script>
+  <script src="/js/jquery.csv.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/escodegen.browser.js"></script>
+  <script src="/js/estraverse.js"></script>
+  <script src="/js/d3.v2.js"></script>
+  <script src="/js/angular.min.js"></script>
+  <script src="/js/radian.min.js"></script>
+<script>
+angular.module('myApp', ['radian']).
+  controller('MyCtrl', ['$scope', '$rootScope', function(sc, rsc)
+{
+  rsc.dat = {};
+  sc.symbols = [];
+  sc.fields = [ { name: 'Open',      label: 'Opening price' },
+                { name: 'High',      label: 'Daily high' },
+                { name: 'Low',       label: 'Daily low' },
+                { name: 'Close',     label: 'Closing price' },
+                { name: 'Volume',    label: 'Daily volume' },
+                { name: 'Adj Close', label: 'Adjusted closing price' } ];
+  sc.stocks = ['CSCO', 'DELL', 'FB', 'GOOG', 'MSFT', 'YHOO'];
+  sc.dataUrl = function(s) {
+    return '/data/' + s + '.csv';
+  };
+}]);
+</script>
+</body>
+</html>
